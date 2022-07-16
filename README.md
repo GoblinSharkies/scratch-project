@@ -39,7 +39,7 @@
 
 <a><img src="./docs/assests/images/git5.png"/></a>
 
-2. Git add & git commit your files
+2. Git add & git commit your files. MAKE SURE YOU ARE ON YOUR BRANCH BEFORE COMMITING! (use `git branch` to check)
 - `git add <YOUR FILES>`
 - `git commit -m"<YOUR COMMENT>`
 
