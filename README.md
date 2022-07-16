@@ -34,7 +34,7 @@
 <a><img src="./docs/assests/images/git4.png"/></a>
 
 ## Saving and Uploading Code
-1. Merge any updates from `dev`. Solve any conflicts (aka differences) between dev and local branch 
+1. Merge any updates from `dev`. Solve any conflicts (aka differences) between `dev` and your local branch 
 
 <a><img src="./docs/assests/images/git5.png"/></a>
 
