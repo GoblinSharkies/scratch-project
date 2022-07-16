@@ -8,6 +8,7 @@
 - `git clone https://github.com/GoblinSharkies/scratch-project.git`
 
 2. Create or go to `dev` branch
+- `git checkout dev`
 
 <a><img src="./docs/assests/images/git1.png"/></a>
 
