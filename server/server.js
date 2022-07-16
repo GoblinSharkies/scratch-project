@@ -7,6 +7,8 @@ const app = express();
 const PORT = 3000;
 
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
 app.get('/hello', (req, res) => {
