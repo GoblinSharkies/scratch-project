@@ -22,7 +22,7 @@
 
 ## Starting Workflow
 
-1. Make sure local branch is up-to-date with dev branch
+1. Make sure local branch is up-to-date with `dev` branch
 
 <a><img src="./docs/assests/images/git5.png"/></a>
 
@@ -31,6 +31,7 @@
 
 <a><img src="./docs/assests/images/git2.png"/></a>
 
+3. Use `git branch` to make sure you are on the correct branch
 <a><img src="./docs/assests/images/git4.png"/></a>
 
 ## Saving and Uploading Code
