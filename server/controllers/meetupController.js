@@ -34,28 +34,28 @@ meetUpController.allUserEntries = (req, res, next) => {
 //create get request for matches
 meetUpController.meetupWithMatch = (req, res, next) => {
 
-  const {activity, day} = req.query;
+  const {activity, day, username} = req.query;
   let queryParams;
   let query;
 
   // i want coffee on saturday (specific)
   if (day && activity ) {
     console.log('picked both')
-    query = `SELECT * FROM meetups WHERE meetups.activity = $1 AND meetups.day = $2`;
-    queryParams = [activity, day];
+    query = `SELECT * FROM meetups WHERE meetups.activity = $1 AND meetups.day = $2 AND meetups.username <> $3`;
+    queryParams = [activity, day, username];
   }
   
   // i want just saturday
   if (day && !activity) {
     console.log('picked day only')
-    query = `SELECT * FROM meetups WHERE meetups.day = $1`;
-    queryParams = [day];
+    query = `SELECT * FROM meetups WHERE meetups.day = $1 AND meetups.username <> $2`;
+    queryParams = [day, username];
   }
   // i want just coffee
   if (!day && activity) {
     console.log('picked activity only')
-    query = `SELECT * FROM meetups WHERE meetups.activity = $1`;
-    queryParams = [activity];
+    query = `SELECT * FROM meetups WHERE meetups.activity = $1 AND meetups.username <> $2`;
+    queryParams = [activity, username];
   }
   
   // run db search 
@@ -71,9 +71,9 @@ meetUpController.meetupWithMatch = (req, res, next) => {
 
 meetUpController.newEntry = (req, res, next) => {
     console.log("req.body:", req.body)
-    const {username, first_name, last_name, activity, day, created_at} = req.body;
-    const query = 'INSERT INTO meetups (username, first_name, last_name, activity, day, created_at) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;'
-    const queryParams = [username, first_name, last_name, activity, day, created_at];
+    const {username, first_name, last_name, activity, day} = req.body;
+    const query = 'INSERT INTO meetups (username, first_name, last_name, activity, day) VALUES ($1, $2, $3, $4, $5) RETURNING *;'
+    const queryParams = [username, first_name, last_name, activity, day];
 
     db.query(query, queryParams)
     .then(data => {

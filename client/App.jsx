@@ -5,13 +5,14 @@ import {
     Route,
     Link
   } from "react-router-dom";
-import Form from './components/form'
+import Form from './components/Form'
 import Login from './components/Login'
+import Matches from './components/Matches'
 
 const App = () => {
     const [day, setDay] = useState('');
     const [activity, setActivity] = useState('');
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState('becauffman');
     const [userEntries, setUserEntries] = useState([]);
     
 
@@ -19,12 +20,13 @@ const App = () => {
         <>
         
         <div>I am goin to be a NAV BAR
-            <Link to="/form">
-                Fill out form
-            </Link>
             <Link to="/">
                 Home
             </Link>
+            <Link to="/form">
+                Fill out form
+            </Link>
+            
             <Link to="/matches">
                 Matches
             </Link>
@@ -48,6 +50,18 @@ const App = () => {
             <Route
                 path="/form"
                 element={<Form
+                    day={day}
+                    setDay={setDay}
+                    activity={activity}
+                    setActivity={setActivity}
+                    userEntries={userEntries}
+                    setUserEntries={setUserEntries}
+                    username={username}
+                />}
+            />
+            <Route
+                path="/matches"
+                element={<Matches
                     day={day}
                     setDay={setDay}
                     activity={activity}

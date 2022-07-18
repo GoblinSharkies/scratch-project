@@ -3,7 +3,7 @@ import { useState ,useEffect } from 'react';
 import '../css/_form.css';
 
 
-const UserSubmissions = ({userEntries}) => {
+const MatchResults = ({userEntries}) => {
   console.log('user entries on UserSubmissions' , userEntries)
   let userEntriesArray = [];
 
@@ -28,4 +28,4 @@ const UserSubmissions = ({userEntries}) => {
 }
 
 
-export default UserSubmissions;
+export default MatchResults;

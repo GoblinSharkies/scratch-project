@@ -2,22 +2,24 @@ import React from 'react';
 import { useState ,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/_form.css';
-import userSubmissions from './userSubmissions'
+import UserSubmissions from './UserSubmissions'
 import axios from 'axios';
 
-const postUrl = 'localhost:3000/newEntry'
-const userUrl = 'localhost:3000/userEntries'
+const postUrl = 'http://localhost:3000/newEntry'
+const userUrl = 'http://localhost:3000/userEntries'
 
 function Form({ day, activity, setDay, setActivity, userEntries, setUserEntries, username }) {
 
   useEffect(() => {
+    console.log('username from login', username)
     const fetchUserEntries = async() => {
       const data = await axios.get(userUrl, {
         params: {
           username: username
         }
       });
-      setUserEntries(data);
+      console.log(data.data);
+      setUserEntries(data.data);
     };
     fetchUserEntries();
   }, [username])
@@ -66,11 +68,13 @@ return (
             <option value={'coffee splunking'}>coffee splunking</option>
           </select>
           <p></p>
-          <Link to="/matches" onClick={clickHandle} className='button'>Submit</Link>
+          {/* <Link to="/matches" onClick={clickHandle} className='button'>Submit</Link> */}
+          <Link onClick={clickHandle} className='button'>Submit</Link>
         </form>
-        <div className='usersubmissions'>
-          <userSubmissions userEntries={userEntries}/>
-        </div>
+
+        <h2>Your Entries</h2>
+        <UserSubmissions userEntries={userEntries}/>
+        
       </div> 
       <div className='secondary'>whats in here?</div>
     </div>
