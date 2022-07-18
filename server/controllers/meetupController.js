@@ -72,8 +72,9 @@ meetUpController.meetupWithMatch = (req, res, next) => {
 meetUpController.newEntry = (req, res, next) => {
     console.log("req.body:", req.body)
     const {username, first_name, last_name, activity, day} = req.body;
-    const query = 'INSERT INTO meetups (username, first_name, last_name, activity, day) VALUES ($1, $2, $3, $4, $5) RETURNING *;'
-    const queryParams = [username, first_name, last_name, activity, day];
+    let newDate = new Date();
+    const query = 'INSERT INTO meetups (username, first_name, last_name, activity, day, created_at) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;'
+    const queryParams = [username, first_name, last_name, activity, day, newDate];
 
     db.query(query, queryParams)
     .then(data => {

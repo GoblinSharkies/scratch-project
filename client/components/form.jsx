@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState ,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/_form.css';
 import UserSubmissions from './UserSubmissions'
@@ -8,7 +8,8 @@ import axios from 'axios';
 const postUrl = 'http://localhost:3000/newEntry'
 const userUrl = 'http://localhost:3000/userEntries'
 
-function Form({ day, activity, setDay, setActivity, userEntries, setUserEntries, username }) {
+function Form({ day, activity, setDay, setActivity, userEntries, setUserEntries, username, setFirst, setLast, first, last }) {
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     console.log('username from login', username)
@@ -20,9 +21,12 @@ function Form({ day, activity, setDay, setActivity, userEntries, setUserEntries,
       });
       console.log(data.data);
       setUserEntries(data.data);
+      setFirst(data.data[0].first_name);
+      setLast(data.data[0].last_name);
+      console.log('full name', data.data[0].first_name, data.data[0].last_name)     
     };
     fetchUserEntries();
-  }, [username])
+  }, [username, submitted])
   
 
 
@@ -38,7 +42,8 @@ function Form({ day, activity, setDay, setActivity, userEntries, setUserEntries,
   }
   
   const clickHandle = async (e) => {
-    const create = await axios.post(postUrl, {day: day, activity: activity});
+    const create = await axios.post(postUrl, {username: username, first_name: first, last_name: last, day: day, activity: activity});
+    setSubmitted(!submitted);
   }
 
   
@@ -48,7 +53,7 @@ return (
       <div className='header'></div>
       <div className='App'>
         <div className='title'>Pick the days and activities that work best for you!</div>
-        <form>
+        <form onSubmit={(e)=> e.preventDefault()}>
           <label className='questions'>Choose a day of the week</label>
           <select className='drop-down' onChange={onDayChange}>
             <option value={'Monday'}>Monday</option>
@@ -69,7 +74,7 @@ return (
           </select>
           <p></p>
           {/* <Link to="/matches" onClick={clickHandle} className='button'>Submit</Link> */}
-          <Link onClick={clickHandle} className='button'>Submit</Link>
+          <button onClick={clickHandle} className='button'>Submit</button>
         </form>
 
         <h2>Your Entries</h2>

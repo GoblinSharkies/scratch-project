@@ -8,12 +8,12 @@ import MatchResults from './MatchResults'
 
 const matchUrl = 'http://localhost:3000/getAllWithMatch'
 
-function Matches({ day, activity, setDay, setActivity, userEntries, setUserEntries, username }) {
+function Matches({ day, activity, setDay, setActivity, userEntries, setUserEntries, username, first, last }) {
   const [matchEntries, setMatchEntries] = useState([])
 
   // useEffect(() => {
   //   console.log('username from login', username)
-  //   const fetchUserEntries = async() => {
+  //   const fetchMatchEntries = async() => {
   //     const data = await axios.get(matchUrl, {
   //       params: {
   //         day: day,
@@ -22,9 +22,9 @@ function Matches({ day, activity, setDay, setActivity, userEntries, setUserEntri
   //       }
   //     });
   //     console.log(data.data);
-  //     setUserEntries(data.data);
+  //     setMatchEntries(data.data);
   //   };
-  //   fetchUserEntries();
+  //   fetchMatchEntries();
   // }, [username])
   
 
@@ -41,7 +41,13 @@ function Matches({ day, activity, setDay, setActivity, userEntries, setUserEntri
   }
   
   const clickHandle = async (e) => {
-    const create = await axios.post(matchUrl, {day: day, activity: activity});
+    axios.get(matchUrl, {
+            params: {
+              day: day,
+              activity: activity,
+              username: username
+            }
+          });
   }
 
   
@@ -73,7 +79,8 @@ return (
             <option value={'coffee splunking'}>coffee splunking</option>
           </select>
           <p></p>
-          <Link to="/matches" onClick={clickHandle} className='button'>Submit</Link>
+          <button onClick={clickHandle} className='button'>Submit</button>
+          {/* <Link to="/matches" onClick={clickHandle} className='button'>Submit</Link> */}
         </form>
 
         <h2>Matches</h2>

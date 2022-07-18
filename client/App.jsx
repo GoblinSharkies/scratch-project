@@ -12,8 +12,10 @@ import Matches from './components/Matches'
 const App = () => {
     const [day, setDay] = useState('');
     const [activity, setActivity] = useState('');
-    const [username, setUsername] = useState('becauffman');
+    const [username, setUsername] = useState('bencauffman');
     const [userEntries, setUserEntries] = useState([]);
+    const [first, setFirst] = useState('');
+    const [last, setLast] = useState('');
     
 
     return (
@@ -57,6 +59,10 @@ const App = () => {
                     userEntries={userEntries}
                     setUserEntries={setUserEntries}
                     username={username}
+                    setFirst={setFirst}
+                    setLast={setLast}
+                    first={first}
+                    last={last}
                 />}
             />
             <Route
@@ -69,6 +75,8 @@ const App = () => {
                     userEntries={userEntries}
                     setUserEntries={setUserEntries}
                     username={username}
+                    first={first}
+                    last={last}
                 />}
             />
         </Routes>
