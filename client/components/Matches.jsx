@@ -11,24 +11,6 @@ const matchUrl = 'http://localhost:3000/getAllWithMatch'
 function Matches({ day, activity, setDay, setActivity, userEntries, setUserEntries, username, first, last }) {
   const [matchEntries, setMatchEntries] = useState([])
 
-  // useEffect(() => {
-  //   console.log('username from login', username)
-  //   const fetchMatchEntries = async() => {
-  //     const data = await axios.get(matchUrl, {
-  //       params: {
-  //         day: day,
-  //         activity: activity,
-  //         username: username
-  //       }
-  //     });
-  //     console.log(data.data);
-  //     setMatchEntries(data.data);
-  //   };
-  //   fetchMatchEntries();
-  // }, [username])
-  
-
-
   const onDayChange = (e) => {
     console.log('onDayChange', e.target.value)
     setDay(e.target.value);
@@ -41,25 +23,26 @@ function Matches({ day, activity, setDay, setActivity, userEntries, setUserEntri
   }
   
   const clickHandle = async (e) => {
-    axios.get(matchUrl, {
+    const data = await axios.get(matchUrl, {
             params: {
               day: day,
               activity: activity,
               username: username
             }
           });
+    console.log('51 data', data);  
+    setMatchEntries(data.data);
   }
 
   
   
 return (
-    <div className='page'>
-      <div className='header'></div>
+    
       <div className='App'>
         <div className='title'>Find others in your area to do activites with! (asl?)</div>
-        <form>
-          <label className='questions'>Choose a day of the week</label>
-          <select className='drop-down' onChange={onDayChange}>
+        <form onSubmit={(e)=> e.preventDefault()}>
+          <label className='questions'>Choose a day of the week  </label>
+          <select defaultValue={''} className='drop-down' onChange={onDayChange}>
             <option value={''}></option>
             <option value={'Monday'}>Monday</option>
             <option value={'Tuesday'}>Tuesday</option>
@@ -70,13 +53,19 @@ return (
             <option value={'Sunday'}>Sunday</option>
           </select>
           <p></p>
-          <label className='questions'>And/or choose an activity</label>
-          <select className='drop-down' label ="activity" onChange={onActivityChange}>
+          <label className='questions'>And/or choose an activity  </label>
+          <select defaultValue={''} className='drop-down' label ="activity" onChange={onActivityChange}>
             <option value={''}></option>
             <option value={'climbing'}>climbing</option>
-            <option value={'cave splunking'}>cave splunking</option>
+            <option value={'hiking'}>hiking</option>
+            <option value={'yoga'}>yoga</option>
+            <option value={'exercising'}>exercising</option>
             <option value={'coffee'}>coffee</option>
-            <option value={'coffee splunking'}>coffee splunking</option>
+            <option value={'beer'}>beer</option>
+            <option value={'cocktails'}>cocktails</option>
+            <option value={'other beverage'}>other beverage</option>
+            <option value={'gym'}>gym</option>
+            <option value={'dinner'}>dinner</option>
           </select>
           <p></p>
           <button onClick={clickHandle} className='button'>Submit</button>
@@ -84,11 +73,10 @@ return (
         </form>
 
         <h2>Matches</h2>
-        <MatchResults userEntries={userEntries}/>
+        <MatchResults matchEntries={matchEntries}/>
         
       </div> 
-      <div className='secondary'>whats in here?</div>
-    </div>
+     
   
   );
 }

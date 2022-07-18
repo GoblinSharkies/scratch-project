@@ -3,16 +3,16 @@ import { useState ,useEffect } from 'react';
 import '../css/_form.css';
 
 
-const MatchResults = ({userEntries}) => {
-  console.log('user entries on UserSubmissions' , userEntries)
-  let userEntriesArray = [];
+const MatchResults = ({ matchEntries }) => {
+  console.log('match entries on MatchEntries' , matchEntries)
+  let matchEntriesArray = [];
 
-  for (let i = 0; i < userEntries.length; i++) {
-    userEntriesArray.push(
+  for (let i = 0; i < matchEntries.length; i++) {
+    matchEntriesArray.push(
       <div key={i} className="mySubmissions">
-        {/* <div>{userEntries[i].first_name} {userEntries[i].last_name}</div> */}
-        <div>{userEntries[i].day}</div>
-        <div>{userEntries[i].activity}</div>
+        <div>{matchEntries[i].first_name} {matchEntries[i].last_name}</div>
+        <div>{matchEntries[i].day}</div>
+        <div>{matchEntries[i].activity}</div>
       </div>
     );
   }
@@ -20,7 +20,7 @@ const MatchResults = ({userEntries}) => {
 
   return(
     <div className='usersubmissions'>
-      {userEntriesArray}
+      {matchEntriesArray}
     </div>
 
   )

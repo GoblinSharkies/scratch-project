@@ -19,68 +19,72 @@ const App = () => {
     
 
     return (
-        <>
+        <div id='main'>
         
-        <div>I am goin to be a NAV BAR
-            <Link to="/">
-                Home
-            </Link>
-            <Link to="/form">
-                Fill out form
-            </Link>
-            
-            <Link to="/matches">
-                Matches
-            </Link>
+       
+            <nav>
+                <div id='title'>Find Goblins in your area</div>
+                <div id='links'>
+                <Link to="/">
+                    Home
+                </Link>
+                <Link to="/form">
+                    Fill out form
+                </Link>
+                
+                <Link to="/matches">
+                    Matches
+                </Link>
+                </div>
 
-
-        </div>
-        <Routes>
-            <Route
-                path="/"
-                element={<Login
-                    day={day}
-                    setDay={setDay}
-                    activity={activity}
-                    setActivity={setActivity}
-                    userEntries={userEntries}
-                    setUserEntries={setUserEntries}
-                    username={username}
-                    setUsername={setUsername}
+            </nav>
+            <Routes>
+                <Route
+                    path="/"
+                    element={<Login
+                        day={day}
+                        setDay={setDay}
+                        activity={activity}
+                        setActivity={setActivity}
+                        userEntries={userEntries}
+                        setUserEntries={setUserEntries}
+                        username={username}
+                        setUsername={setUsername}
+                        />}
+                    />
+                <Route
+                    path="/form"
+                    element={<Form
+                        day={day}
+                        setDay={setDay}
+                        activity={activity}
+                        setActivity={setActivity}
+                        userEntries={userEntries}
+                        setUserEntries={setUserEntries}
+                        username={username}
+                        setFirst={setFirst}
+                        setLast={setLast}
+                        first={first}
+                        last={last}
                     />}
                 />
-            <Route
-                path="/form"
-                element={<Form
-                    day={day}
-                    setDay={setDay}
-                    activity={activity}
-                    setActivity={setActivity}
-                    userEntries={userEntries}
-                    setUserEntries={setUserEntries}
-                    username={username}
-                    setFirst={setFirst}
-                    setLast={setLast}
-                    first={first}
-                    last={last}
-                />}
-            />
-            <Route
-                path="/matches"
-                element={<Matches
-                    day={day}
-                    setDay={setDay}
-                    activity={activity}
-                    setActivity={setActivity}
-                    userEntries={userEntries}
-                    setUserEntries={setUserEntries}
-                    username={username}
-                    first={first}
-                    last={last}
-                />}
-            />
-        </Routes>
-        </>
+                <Route
+                    path="/matches"
+                    element={<Matches
+                        day={day}
+                        setDay={setDay}
+                        activity={activity}
+                        setActivity={setActivity}
+                        userEntries={userEntries}
+                        setUserEntries={setUserEntries}
+                        username={username}
+                        first={first}
+                        last={last}
+                    />}
+                />
+            </Routes>
+            
+        </div>
     )
 }
 

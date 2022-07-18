@@ -33,7 +33,7 @@ meetUpController.allUserEntries = (req, res, next) => {
 
 //create get request for matches
 meetUpController.meetupWithMatch = (req, res, next) => {
-
+  console.log('started meetUpController.meetupWithMatch')
   const {activity, day, username} = req.query;
   let queryParams;
   let query;

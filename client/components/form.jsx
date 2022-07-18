@@ -49,12 +49,12 @@ function Form({ day, activity, setDay, setActivity, userEntries, setUserEntries,
   
   
 return (
-    <div className='page'>
-      <div className='header'></div>
+    
+  
       <div className='App'>
         <div className='title'>Pick the days and activities that work best for you!</div>
         <form onSubmit={(e)=> e.preventDefault()}>
-          <label className='questions'>Choose a day of the week</label>
+          <label className='questions'>Choose a day of the week  </label>
           <select className='drop-down' onChange={onDayChange}>
             <option value={'Monday'}>Monday</option>
             <option value={'Tuesday'}>Tuesday</option>
@@ -65,12 +65,18 @@ return (
             <option value={'Sunday'}>Sunday</option>
           </select>
           <p></p>
-          <label className='questions'>Choose an activity</label>
+          <label className='questions'>Choose an activity  </label>
           <select className='drop-down' label ="activity" onChange={onActivityChange}>
             <option value={'climbing'}>climbing</option>
-            <option value={'cave splunking'}>cave splunking</option>
+            <option value={'hiking'}>hiking</option>
+            <option value={'yoga'}>yoga</option>
+            <option value={'exercising'}>exercising</option>
             <option value={'coffee'}>coffee</option>
-            <option value={'coffee splunking'}>coffee splunking</option>
+            <option value={'beer'}>beer</option>
+            <option value={'cocktails'}>cocktails</option>
+            <option value={'other beverage'}>other beverage</option>
+            <option value={'gym'}>gym</option>
+            <option value={'dinner'}>dinner</option>
           </select>
           <p></p>
           {/* <Link to="/matches" onClick={clickHandle} className='button'>Submit</Link> */}
@@ -79,10 +85,10 @@ return (
 
         <h2>Your Entries</h2>
         <UserSubmissions userEntries={userEntries}/>
-        
+        {/* <div className='secondary'>whats in here?</div> */}
       </div> 
-      <div className='secondary'>whats in here?</div>
-    </div>
+      
+   
   
   );
 }

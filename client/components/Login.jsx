@@ -13,9 +13,9 @@ const Login = ({ username, setUsername }) => {
 
     return (
 
-        <div className='App'>
+    <div id='login' className='App'>
         <div className='title'></div>
-          <label>User Name</label>  
+          {/* <label>User Name</label>   */}
           <input onChange={updateUsernamefunc} type='text' placeholder='username' required/>
           <input type='password' placeholder='password' required/>
           <Link to="/form" className='button'>Login</Link>
