@@ -7,6 +7,11 @@ router.get('/getAll', meetUpController.allMeetups, (req, res) => {
     res.status(200).json(res.locals.data);
 } )
 
+//find all user entries
+router.get('/userEntries', meetUpController.allUserEntries, (req, res) => {
+    res.status(200).json(res.locals.data);
+} )
+
 router.get('/getAllWithMatch', meetUpController.meetupWithMatch, (req, res) => {
     res.status(200).json(res.locals.data);
 } )
