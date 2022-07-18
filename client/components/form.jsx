@@ -1,22 +1,42 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState ,useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../css/_form.css';
+import userSubmissions from './userSubmissions'
+import axios from 'axios';
 
-function Form() {
-  const [meetupInfo, setMeetupInfo] = useState({username: '', first_name: '', last_name: '', activity: '', day: ''});
+const postUrl = 'localhost:3000/newEntry'
+const userUrl = 'localhost:3000/userEntries'
+
+function Form({ day, activity, setDay, setActivity, userEntries, setUserEntries, username }) {
+
+  useEffect(() => {
+    const fetchUserEntries = async() => {
+      const data = await axios.get(userUrl, {
+        params: {
+          username: username
+        }
+      });
+      setUserEntries(data);
+    };
+    fetchUserEntries();
+  }, [username])
+  
 
 
   const onDayChange = (e) => {
-    // if (e.target === "activity")
-    // setDa(prev => {}e.target.value)
-    console.log('onDayChange')
+    console.log('onDayChange', e.target.value)
+    setDay(e.target.value);
   }
 
   const onActivityChange = (e) => {
-    // if (e.target === "activity")
-    // setDa(prev => {}e.target.value)
-    console.log('onActivityChange')
+    console.log('onActivityChange', e.target.value)
+    setActivity(e.target.value);
 
+  }
+  
+  const clickHandle = async (e) => {
+    const create = await axios.post(postUrl, {day: day, activity: activity});
   }
 
   
@@ -25,19 +45,10 @@ return (
     <div className='page'>
       <div className='header'></div>
       <div className='App'>
-        <div className='title'>Pick the times that work best for you!</div>
+        <div className='title'>Pick the days and activities that work best for you!</div>
         <form>
-          <label>Choose an activity</label>
-          <select class='drop-down' label ="activity" onChange={onDayChange}>
-            <option value={'climbing'}>climbing</option>
-            <option value={'cave splunking'}>cave splunking</option>
-            <option value={'coffee'}>coffee</option>
-            <option value={'coffee splunking'}>coffee splunking</option>
-          </select>
-        </form>
-        <form>
-          <label>Choose a day of the week</label>
-          <select class='drop-down' onChange={onActivityChange}>
+          <label className='questions'>Choose a day of the week</label>
+          <select className='drop-down' onChange={onDayChange}>
             <option value={'Monday'}>Monday</option>
             <option value={'Tuesday'}>Tuesday</option>
             <option value={'Wednesday'}>Wednesday</option>
@@ -46,13 +57,27 @@ return (
             <option value={'Saturday'}>Saturday</option>
             <option value={'Sunday'}>Sunday</option>
           </select>
-          <button>Submit</button>
+          <p></p>
+          <label className='questions'>Choose an activity</label>
+          <select className='drop-down' label ="activity" onChange={onActivityChange}>
+            <option value={'climbing'}>climbing</option>
+            <option value={'cave splunking'}>cave splunking</option>
+            <option value={'coffee'}>coffee</option>
+            <option value={'coffee splunking'}>coffee splunking</option>
+          </select>
+          <p></p>
+          <Link to="/matches" onClick={clickHandle} className='button'>Submit</Link>
         </form>
-      </div>
+        <div className='usersubmissions'>
+          <userSubmissions userEntries={userEntries}/>
+        </div>
+      </div> 
+      <div className='secondary'>whats in here?</div>
     </div>
   
   );
 }
+
 
 
 // dropdown for day (7 days of week)

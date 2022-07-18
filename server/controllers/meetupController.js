@@ -15,6 +15,21 @@ meetUpController.allMeetups = (req, res, next) => {
     .catch(err=>({error: err}))
 }
 
+meetUpController.allUserEntries = (req, res, next) => {
+
+  const {username} = req.query;
+
+  const sqlQuerie = 'SELECT * FROM meetups WHERE username = $1';
+  let params = [username];
+  db.query(sqlQuerie, params)
+  .then(data => {
+      console.log('data: ', data);
+      res.locals.data = data.rows;
+      return next();
+  })
+  .catch(err=>({error: err}))
+}
+
 
 //create get request for matches
 meetUpController.meetupWithMatch = (req, res, next) => {
