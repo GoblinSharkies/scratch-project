@@ -36,17 +36,6 @@
   padding: 42px 0 84px;
 }
 
-.coffee-photo {
-  background-color: #2b5876;
-  /* margin: 70px; */
-  /* max-height: 200px;
-  min-width: 100%; */
-  background-size: contain;
-  border-style: solid;
-  border-width: 5px;
-  border-color: black;
-}
-
 .secondary {
   background-color: #2b5876;
   width: 100%;
@@ -56,8 +45,6 @@
 .title {
   font-size: 30px;
 }
-
-
 
 .button {
     background-color: #111827;
