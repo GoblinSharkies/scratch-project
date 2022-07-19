@@ -39,10 +39,10 @@ function Matches({ day, activity, setDay, setActivity, userEntries, setUserEntri
 return (
     
       <div className='App'>
-        <div className='title'>Find others in your area to do activites with! (asl?)</div>
+        <div className='title'>Find other Goblins in your area to do activites with!</div>
         <form onSubmit={(e)=> e.preventDefault()}>
           <label className='questions'>Choose a day of the week  </label>
-          <select defaultValue={''} className='drop-down' onChange={onDayChange}>
+          <select className='drop-down' onChange={onDayChange}>
             <option value={''}></option>
             <option value={'Monday'}>Monday</option>
             <option value={'Tuesday'}>Tuesday</option>
@@ -54,7 +54,7 @@ return (
           </select>
           <p></p>
           <label className='questions'>And/or choose an activity  </label>
-          <select defaultValue={''} className='drop-down' label ="activity" onChange={onActivityChange}>
+          <select className='drop-down' label ="activity" onChange={onActivityChange}>
             <option value={''}></option>
             <option value={'climbing'}>climbing</option>
             <option value={'hiking'}>hiking</option>
@@ -66,6 +66,7 @@ return (
             <option value={'other beverage'}>other beverage</option>
             <option value={'gym'}>gym</option>
             <option value={'dinner'}>dinner</option>
+            <option value={'street fighting'}>street fighting</option>
           </select>
           <p></p>
           <button onClick={clickHandle} className='button'>Submit</button>

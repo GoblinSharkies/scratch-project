@@ -10,6 +10,8 @@ const userUrl = 'http://localhost:3000/userEntries'
 
 function Form({ day, activity, setDay, setActivity, userEntries, setUserEntries, username, setFirst, setLast, first, last }) {
   const [submitted, setSubmitted] = useState(false);
+  
+
 
   useEffect(() => {
     console.log('username from login', username)
@@ -55,7 +57,7 @@ return (
         <div className='title'>Pick the days and activities that work best for you!</div>
         <form onSubmit={(e)=> e.preventDefault()}>
           <label className='questions'>Choose a day of the week  </label>
-          <select className='drop-down' onChange={onDayChange}>
+          <select defaultValue={'Monday'} className='drop-down' onChange={onDayChange}>
             <option value={'Monday'}>Monday</option>
             <option value={'Tuesday'}>Tuesday</option>
             <option value={'Wednesday'}>Wednesday</option>
@@ -66,7 +68,7 @@ return (
           </select>
           <p></p>
           <label className='questions'>Choose an activity  </label>
-          <select className='drop-down' label ="activity" onChange={onActivityChange}>
+          <select defaultValue={'climbing'} className='drop-down' label ="activity" onChange={onActivityChange}>
             <option value={'climbing'}>climbing</option>
             <option value={'hiking'}>hiking</option>
             <option value={'yoga'}>yoga</option>
@@ -77,6 +79,7 @@ return (
             <option value={'other beverage'}>other beverage</option>
             <option value={'gym'}>gym</option>
             <option value={'dinner'}>dinner</option>
+            <option value={'street fighting'}>street fighting</option>
           </select>
           <p></p>
           {/* <Link to="/matches" onClick={clickHandle} className='button'>Submit</Link> */}

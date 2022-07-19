@@ -20,9 +20,7 @@ const Login = ({ username, setUsername }) => {
           <input type='password' placeholder='password' required/>
           <Link to="/form" className='button'>Login</Link>
       </div> 
-
     )
-
 }
 
 export default Login;

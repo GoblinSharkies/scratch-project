@@ -23,13 +23,13 @@ const App = () => {
         
        
             <nav>
-                <div id='title'>Find Goblins in your area</div>
+                <div id='title'>Goblin Finder</div>
                 <div id='links'>
                 <Link to="/">
                     Home
                 </Link>
                 <Link to="/form">
-                    Fill out form
+                    Profile
                 </Link>
                 
                 <Link to="/matches">
