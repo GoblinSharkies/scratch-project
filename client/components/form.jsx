@@ -1,26 +1,34 @@
 import React from 'react';
-import { useState ,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/_form.css';
-import userSubmissions from './userSubmissions'
+import UserSubmissions from './UserSubmissions'
 import axios from 'axios';
 
-const postUrl = 'localhost:3000/newEntry'
-const userUrl = 'localhost:3000/userEntries'
+const postUrl = 'http://localhost:3000/newEntry'
+const userUrl = 'http://localhost:3000/userEntries'
 
-function Form({ day, activity, setDay, setActivity, userEntries, setUserEntries, username }) {
+function Form({ day, activity, setDay, setActivity, userEntries, setUserEntries, username, setFirst, setLast, first, last }) {
+  const [submitted, setSubmitted] = useState(false);
+  
+
 
   useEffect(() => {
+    console.log('username from login', username)
     const fetchUserEntries = async() => {
       const data = await axios.get(userUrl, {
         params: {
           username: username
         }
       });
-      setUserEntries(data);
+      console.log(data.data);
+      setUserEntries(data.data);
+      setFirst(data.data[0].first_name);
+      setLast(data.data[0].last_name);
+      console.log('full name', data.data[0].first_name, data.data[0].last_name)     
     };
     fetchUserEntries();
-  }, [username])
+  }, [username, submitted])
   
 
 
@@ -36,19 +44,20 @@ function Form({ day, activity, setDay, setActivity, userEntries, setUserEntries,
   }
   
   const clickHandle = async (e) => {
-    const create = await axios.post(postUrl, {day: day, activity: activity});
+    const create = await axios.post(postUrl, {username: username, first_name: first, last_name: last, day: day, activity: activity});
+    setSubmitted(!submitted);
   }
 
   
   
 return (
-    <div className='page'>
-      <div className='header'></div>
+    
+  
       <div className='App'>
         <div className='title'>Pick the days and activities that work best for you!</div>
-        <form>
-          <label className='questions'>Choose a day of the week</label>
-          <select className='drop-down' onChange={onDayChange}>
+        <form onSubmit={(e)=> e.preventDefault()}>
+          <label className='questions'>Choose a day of the week  </label>
+          <select defaultValue={'Monday'} className='drop-down' onChange={onDayChange}>
             <option value={'Monday'}>Monday</option>
             <option value={'Tuesday'}>Tuesday</option>
             <option value={'Wednesday'}>Wednesday</option>
@@ -58,22 +67,31 @@ return (
             <option value={'Sunday'}>Sunday</option>
           </select>
           <p></p>
-          <label className='questions'>Choose an activity</label>
-          <select className='drop-down' label ="activity" onChange={onActivityChange}>
+          <label className='questions'>Choose an activity  </label>
+          <select defaultValue={'climbing'} className='drop-down' label ="activity" onChange={onActivityChange}>
             <option value={'climbing'}>climbing</option>
-            <option value={'cave splunking'}>cave splunking</option>
+            <option value={'hiking'}>hiking</option>
+            <option value={'yoga'}>yoga</option>
+            <option value={'exercising'}>exercising</option>
             <option value={'coffee'}>coffee</option>
-            <option value={'coffee splunking'}>coffee splunking</option>
+            <option value={'beer'}>beer</option>
+            <option value={'cocktails'}>cocktails</option>
+            <option value={'other beverage'}>other beverage</option>
+            <option value={'gym'}>gym</option>
+            <option value={'dinner'}>dinner</option>
+            <option value={'street fighting'}>street fighting</option>
           </select>
           <p></p>
-          <Link to="/matches" onClick={clickHandle} className='button'>Submit</Link>
+          {/* <Link to="/matches" onClick={clickHandle} className='button'>Submit</Link> */}
+          <button onClick={clickHandle} className='button'>Submit</button>
         </form>
-        <div className='usersubmissions'>
-          <userSubmissions userEntries={userEntries}/>
-        </div>
+
+        <h2>Your Entries</h2>
+        <UserSubmissions userEntries={userEntries}/>
+        {/* <div className='secondary'>whats in here?</div> */}
       </div> 
-      <div className='secondary'>whats in here?</div>
-    </div>
+      
+   
   
   );
 }

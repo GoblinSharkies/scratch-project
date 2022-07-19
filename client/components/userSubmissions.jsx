@@ -3,15 +3,23 @@ import { useState ,useEffect } from 'react';
 import '../css/_form.css';
 
 
-const userSubmissions = ({userEntries}) => {
-
+const UserSubmissions = ({userEntries}) => {
+  console.log('user entries on UserSubmissions' , userEntries)
   let userEntriesArray = [];
+
   for (let i = 0; i < userEntries.length; i++) {
-    userEntriesArray.push(userEntries[i]);
+    userEntriesArray.push(
+      <div key={i} className="mySubmissions">
+        {/* <div>{userEntries[i].first_name} {userEntries[i].last_name}</div> */}
+        <div>{userEntries[i].day}</div>
+        <div>{userEntries[i].activity}</div>
+      </div>
+    );
   }
+  
 
   return(
-    <div>
+    <div className='usersubmissions'>
       {userEntriesArray}
     </div>
 
@@ -20,4 +28,4 @@ const userSubmissions = ({userEntries}) => {
 }
 
 
-export default userSubmissions;
+export default UserSubmissions;

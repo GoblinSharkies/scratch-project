@@ -5,60 +5,86 @@ import {
     Route,
     Link
   } from "react-router-dom";
-import Form from './components/form'
+import Form from './components/Form'
 import Login from './components/Login'
+import Matches from './components/Matches'
 
 const App = () => {
     const [day, setDay] = useState('');
     const [activity, setActivity] = useState('');
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState('bencauffman');
     const [userEntries, setUserEntries] = useState([]);
+    const [first, setFirst] = useState('');
+    const [last, setLast] = useState('');
     
 
     return (
-        <>
+        <div id='main'>
         
-        <div>I am goin to be a NAV BAR
-            <Link to="/form">
-                Fill out form
-            </Link>
-            <Link to="/">
-                Home
-            </Link>
-            <Link to="/matches">
-                Matches
-            </Link>
+       
+            <nav>
+                <div id='title'>Goblin Finder</div>
+                <div id='links'>
+                <Link to="/">
+                    Home
+                </Link>
+                <Link to="/form">
+                    Profile
+                </Link>
+                
+                <Link to="/matches">
+                    Matches
+                </Link>
+                </div>
 
-
-        </div>
-        <Routes>
-            <Route
-                path="/"
-                element={<Login
-                    day={day}
-                    setDay={setDay}
-                    activity={activity}
-                    setActivity={setActivity}
-                    userEntries={userEntries}
-                    setUserEntries={setUserEntries}
-                    username={username}
-                    setUsername={setUsername}
+            </nav>
+            <Routes>
+                <Route
+                    path="/"
+                    element={<Login
+                        day={day}
+                        setDay={setDay}
+                        activity={activity}
+                        setActivity={setActivity}
+                        userEntries={userEntries}
+                        setUserEntries={setUserEntries}
+                        username={username}
+                        setUsername={setUsername}
+                        />}
+                    />
+                <Route
+                    path="/form"
+                    element={<Form
+                        day={day}
+                        setDay={setDay}
+                        activity={activity}
+                        setActivity={setActivity}
+                        userEntries={userEntries}
+                        setUserEntries={setUserEntries}
+                        username={username}
+                        setFirst={setFirst}
+                        setLast={setLast}
+                        first={first}
+                        last={last}
                     />}
                 />
-            <Route
-                path="/form"
-                element={<Form
-                    day={day}
-                    setDay={setDay}
-                    activity={activity}
-                    setActivity={setActivity}
-                    userEntries={userEntries}
-                    setUserEntries={setUserEntries}
-                    username={username}
-                />}
-            />
-        </Routes>
-        </>
+                <Route
+                    path="/matches"
+                    element={<Matches
+                        day={day}
+                        setDay={setDay}
+                        activity={activity}
+                        setActivity={setActivity}
+                        userEntries={userEntries}
+                        setUserEntries={setUserEntries}
+                        username={username}
+                        first={first}
+                        last={last}
+                    />}
+                />
+            </Routes>
+            
+        </div>
     )
 }
 
